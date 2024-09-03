@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <title> Action history</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #444;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      .search-container,
+      .date-picker {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      input[type="date"] {
+        width: 100%;
+        padding: 12px 40px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        color: #888;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        color: #333;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sidebar">
+      <a href="/index.html" class="item"><i class="fa fa-home fa-2x"></i> Dashboard</a>
+      <a href="/profile.html" class="item"><i class="fa fa-user fa-2x"></i> Profile </a>
+      <a href="/Action_history.html" class="item"><i class="fa fa-cog fa-2x"></i> Action history</a>
+      <a href="/data_sensor.html" class="item"><i class="fa fa-cog fa-2x"></i> Data sensor</a>
+    </div>
+    <div class="container">
+      <h1>Kiểm tra lịch sử bật tắt</h1>
+
+      <div class="date-picker">
+        <i class="fas fa-calendar icon"></i>
+        <input type="date" id="date" />
+      </div>
+
+      <div class="search-container">
+        <i class="fas fa-search icon"></i>
+        <input type="text" id="search" placeholder="Tìm kiếm tên thiết bị..." />
+      </div>
+
+      <!-- Bảng hiển thị lịch sử -->
+      <table>
+        <thead>
+          <tr>
+            <th>Thời gian</th>
+            <th>Tên thiết bị</th>
+            <th>Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody id="historyTable">
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      // Mẫu dữ liệu lịch sử thiết bị
+      const historyData = [
+        { time: "2024-08-28 10:00", device: "Đèn", status: "Bật" },
+        { time: "2024-08-28 10:01", device: "Đèn", status: "Tắt" },
+        { time: "2024-08-29 12:00", device: "Quạt", status: "Tắt" },
+        { time: "2024-08-30 14:00", device: "Điều hòa", status: "Bật" },
+        { time: "2024-08-31 09:00", device: "Đèn", status: "Tắt" },
+        { time: "2024-08-27 11:00", device: "Quạt", status: "Bật" },
+        { time: "2024-08-26 13:00", device: "Điều hòa", status: "Tắt" },
+      ];
+
+      // Hàm để hiển thị lịch sử thiết bị trong bảng
+      function displayHistory(data) {
+        const historyTable = document.getElementById("historyTable");
+        historyTable.innerHTML = ""; // Xóa nội dung hiện tại
+        const limitedData = data.slice(0, 20); // Chỉ lấy 20 mục đầu tiên
+        limitedData.forEach((entry) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td>${entry.time}</td><td>${entry.device}</td><td>${entry.status}</td>`;
+          historyTable.appendChild(row);
+        });
+      }
+
+      // Hiển thị tất cả dữ liệu ban đầu (giới hạn 20)
+      displayHistory(historyData);
+
+      // Xử lý sự kiện tìm kiếm thiết bị
+      document.getElementById("search").addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        const filteredData = historyData.filter((entry) =>
+          entry.device.toLowerCase().includes(query)
+        );
+        displayHistory(filteredData);
+      });
+
+      // Xử lý sự kiện chọn ngày
+      document.getElementById("date").addEventListener("change", function () {
+        const selectedDate = this.value;
+        const filteredData = historyData.filter((entry) =>
+          entry.time.startsWith(selectedDate)
+        );
+        displayHistory(filteredData);
+      });
+    </script>
+  </body>
+</html>

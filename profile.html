@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Profile</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          margin: 0;
+          padding: 0;
+      }
+      .avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+      .container {
+          width: 100%;
+          max-width: 600px;
+          margin: 50px auto;
+          background-color: #fff;
+          padding: 20px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          text-align: center;
+      }
+
+      h1 {
+          color: #333;
+      }
+
+      .info {
+          margin: 20px 0;
+      }
+
+      .info div {
+          margin: 10px 0;
+          font-size: 18px;
+          color: #555;
+      }
+
+      .info i {
+          margin-right: 10px;
+          color: #007bff;
+      }
+
+      .social-icons {
+          margin: 20px 0;
+      }
+
+      .social-icons a {
+          text-decoration: none;
+          margin: 0 10px;
+          color: #555;
+          font-size: 24px;
+      }
+
+      .social-icons a:hover {
+          color: #007bff;
+      }
+  </style>
+</head>
+
+  <body>
+    <div id="sidebar">
+      <a href="/index.html" class="item"><i class="fa fa-home fa-2x"></i> Dashboard</a>
+      <a href="/profile.html" class="item"><i class="fa fa-user fa-2x"></i> Profile </a>
+      <a href="/Action_history.html" class="item"><i class="fa fa-cog fa-2x"></i> Action history</a>
+      <a href="/data_sensor.html" class="item"><i class="fa fa-cog fa-2x"></i> Data sensor</a>
+    </div>
+    <div class="container">
+      <h1>Giới Thiệu Bản Thân</h1>
+       <!-- Add avatar image -->
+       <img src="images/avatar.png" alt="Avatar" class="avatar" />
+      <div class="info">
+          <div>
+              <i class="fas fa-envelope"></i > Email: <a href="mailto:Levuong2607@gmail.com" style="color: #333;">Levuong2607@gmail.com</a>
+          </div>
+          <div>
+            <i class="fas fa-user"></i> MSV: B21DCAT225
+        </div>
+          <div>
+              <i class="fas fa-phone"></i> Phone: 0865809232
+          </div>
+          <div>
+              <i class="fas fa-map-marker-alt"></i> Address: Hà Đông, Hà Nội, Việt Nam
+          </div>
+      </div>
+      <div class="social-icons">
+        <!-- <a href="https://www.facebook.com/vuong.lexuan.50" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a> -->
+        <a href="https://github.com/vray15/iotsmarthome" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <!-- <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a> -->
+    </div>
+  </div>
+  </body>
+</html>

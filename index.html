@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Dashboard</title>
+  </head>
+
+  <body>
+    <div id="sidebar">
+      <a href="/index.html" class="item"><i class="fa fa-home fa-2x"></i> Dashboard</a>
+      <a href="/profile.html" class="item"><i class="fa fa-user fa-2x"></i> Profile </a>
+      <a href="/Action_history.html" class="item"><i class="fa fa-cog fa-2x"></i> Action history</a>
+      <a href="/data_sensor.html" class="item"><i class="fa fa-cog fa-2x"></i> Data sensor</a>
+    </div>
+
+    <div id="container">
+      <div class="header">
+        <div class="header-item temp" id="temp_color">
+          <span class="label"><i class="fa fa-thermometer-three-quarters fa-4x" ></i></span>
+          <div id="temperature" class="label"></div>
+        </div>
+        <div class="header-item humidity" id="humi_color">
+          <span class="label"><i class="fa fa-tint fa-4x"></i></span>
+          <div id="humidity" class="label"></div>
+        </div>
+        <div class="header-item light" id="light_color">
+          <span class="label"><i class="fa fa-lightbulb-o fa-4x"></i></span>
+          <div id="light" class="label"></div>
+        </div>
+      </div>
+<div class="content">
+
+  <!-- Đồ thị -->
+      <div class="chart">
+        <canvas id="myChart"></canvas>
+      </div>
+  <!--        -->
+        <div class="frame">
+          <div class="switch">
+            <img id="bulb" src="off.gif" />
+            <div class="buttons">
+              <button class="on1" onclick="onClickOn1()">On</button>
+              <button class="off1 off" onclick="onClickOff1()">Off</button>
+            </div>
+          </div>
+          <div class="switch">
+            <img id="fan" src="fan.png" />
+            <div class="buttons">
+              <button class="on2" onclick="onClickOn2()">On</button>
+              <button class="off2 off" onclick="onClickOff2()">Off</button>
+            </div>
+          </div>
+          <div class="switch">
+            <img id="bulb1" src="air-off.png" />
+            <div class="buttons">
+              <button class="on3" onclick="onClickOn3()">On</button>
+              <button class="off3 off" onclick="onClickOff3()">Off</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

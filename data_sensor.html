@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <title>Data sensor</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+.search-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.date-range, .temperature-search {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input, select {
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 150px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+    </style>
+  </head>
+  <body>
+    <div id="sidebar">
+      <a href="/index.html" class="item"><i class="fa fa-home fa-2x"></i> Dashboard</a>
+      <a href="/profile.html" class="item"><i class="fa fa-user fa-2x"></i> Profile </a>
+      <a href="/Action_history.html" class="item"><i class="fa fa-cog fa-2x"></i> Action history</a>
+      <a href="/data_sensor.html" class="item"><i class="fa fa-cog fa-2x"></i> Data sensor</a>
+    </div>
+    <div class="container">
+      <h1>Lịch Sử Dữ Liệu</h1>
+        <div class="search-section">
+            <div class="date-range">
+                <label for="start-date">Khoảng thời gian:</label>
+                <input type="date" id="start-date">
+                <input type="date" id="end-date">
+            </div>
+            <div class="temperature-search">
+                <label for="temperature">Nhiệt độ:</label>
+                <input type="number" id="temperature" placeholder="Nhập nhiệt độ (°C)">
+            </div>
+        </div>
+
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Thời gian</th>
+                    <th>Nhiệt độ (°C)</th>
+                    <th>Độ ẩm (%)</th>
+                    <th>Ánh sáng (lux)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu ảo + -->
+            </tbody>
+        </table>
+    </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    generateDummyData(); // Gọi hàm để tạo dữ liệu ảo khi trang được tải
+
+    // Gắn sự kiện cho trường nhập liệu nhiệt độ
+    document.getElementById("temperature").addEventListener("input", filterData);
+});
+
+function generateDummyData() {
+    const tableBody = document.querySelector("#data-table tbody");
+    tableBody.innerHTML = "";
+
+    const dummyData = [
+        { time: "2024-08-27 10:00", temperature: 25, humidity: 60, light: 300 },
+        { time: "2024-08-27 11:00", temperature: 26, humidity: 62, light: 320 },
+        { time: "2024-08-27 12:00", temperature: 27, humidity: 65, light: 340 },
+        { time: "2024-08-28 10:00", temperature: 24, humidity: 59, light: 310 },
+        { time: "2024-08-28 11:00", temperature: 23, humidity: 58, light: 330 },
+        { time: "2024-08-28 12:00", temperature: 28, humidity: 70, light: 350 },
+    ];
+
+    // Lưu dữ liệu vào biến toàn cục để sử dụng cho lọc
+    window.dummyData = dummyData;
+
+    // Hiển thị dữ liệu ảo vào bảng
+    dummyData.forEach(data => {
+        const row = `
+            <tr>
+                <td>${data.time}</td>
+                <td>${data.temperature}</td>
+                <td>${data.humidity}</td>
+                <td>${data.light}</td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+
+function filterData() {
+    const startDate = document.getElementById("start-date").value;
+    const endDate = document.getElementById("end-date").value;
+    const temperature = document.getElementById("temperature").value;
+
+    // Lọc dữ liệu dựa trên nhiệt độ và khoảng thời gian
+    const filteredData = window.dummyData.filter(data => {
+        const dataDate = new Date(data.time);
+        const isWithinDateRange = (!startDate || dataDate >= new Date(startDate)) && (!endDate || dataDate <= new Date(endDate));
+        const matchesTemperature = !temperature || data.temperature == temperature;
+
+        return isWithinDateRange && matchesTemperature;
+    });
+
+    // Cập nhật bảng với dữ liệu đã lọc
+    const tableBody = document.querySelector("#data-table tbody");
+    tableBody.innerHTML = "";
+    filteredData.forEach(data => {
+        const row = `
+            <tr>
+                <td>${data.time}</td>
+                <td>${data.temperature}</td>
+                <td>${data.humidity}</td>
+                <td>${data.light}</td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+  </script>
+  </body>
+</html>
